@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title> Title </title>
+	<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+ <style>
+	
+	*{
+		padding:0px; 
+		margin:0px;
+	}
+	header{
+		padding:5px;
+		text-align:center;
+		background-color:rgb(173, 231, 240); 
+		color: orange; 
+		
+	}
+	section{
+		background-color:rgba(173, 231, 240,0.2); 
+		min-height:420px;
+	}
+	#first_h,#second_h,#first_min,#second_min,#first_sec,#second_sec{
+		width:8%
+	} 
+	.gap{
+		width:6%
+	}
+	.time_cont{
+		text-align: center;
+		color:blue;
+		overflow: hidden; 
+		background-color:rgba(173, 231, 240,0.3); 
+		transition: opacity 1s ease-out;
+	}
+	.btn{
+		padding:6px;
+		border-radius:5px;
+		color:orange; 
+		border:2px solid #345B70;
+		background-color:#fff; 
+		height:40px; 
+		font-size:18px; 
+		transition: background-color 1s;
+		
+	}
+	.btn:hover{
+		background-color:#ccc; 
+	}
+	#wrap{
+		width:90%;
+		margin:10px auto; 
+	   text-align: center; 
+	   
+	}
+	#calc{
+		width:50%;
+		margin:5px auto;
+		border-radius:8px;
+		padding:3px; 
+		background-color:#555; 
+		padding:10px; 
+	}
+	form input[type=button]{
+		width:22.75%;
+		padding:8px 0px; 
+		color:red;
+		border:1px solid #333;
+		font-weight:bold; 
+		
+	}
+	.cal_cont{
+		transition: opacity 1s ease-in;
+	}
+	form #screen{
+		width:94%; 
+		font-size:16px; 
+		padding:2%; 
+		border-radius:5px; 
+	}
+	ul li{
+		style:none;
+		display: inline;
+		padding:8px 1px;
+		border:2px solid #377B8A;
+		background-color:#fff;
+		transition: background-color 1s ease-in;
+		border-radius:5px; 
+	}
+	ul li:hover{
+		background-color:#ccc; 
+	}
+	.opac{
+		opacity:0;
+	}
+	footer{
+		padding:5px;
+		color:#555;
+		text-align: center;
+		background-color:rgb(173, 231, 240); 
+	}
+ </style>
+</head>
+<body onload="startTime()" >
+	<header>
+		<h3>Digital Clock and Calculator</h3>
+		<h6 style="font-weight: normal;">...made with JavaScript</h6>
+	</header>
+	<section>
+		<!--Clock section-->
+		
+		<div class="time_cont" id="time_cont">
+		<hr>
+		<br>
+		<span id="hr_section">
+			<image src="dig1.gif" title="h" id="first_h">
+			<image src="dig1.gif" title="h" id="second_h">
+		</span>
+		<span id="min_section">
+			<image src="dig^.gif" title=":" class="gap">
+			<image src="dig1.gif" title="m" id="first_min">
+			<image src="dig1.gif" title="m" id="second_min">
+		</span>
+		<span id="sec_section">
+			<image src="dig^.gif" title=":" class="gap">
+			<image src="dig1.gif" title="s" id="first_sec">
+			<image src="dig1.gif" title="s" id="second_sec">
+		</span>
+		<br><hr>
+		</div>
+		<!--/Clock section-->
+		
+		<br>
+		<!--Calculator section-->
+		<div class="cal_cont" id="cal_cont"> 
+		 
+		 <form name="calculator" id="calc">
+            <br>
+            
+            <input type="text" name="answer" id="screen" />
+            <br>
+            <div id="wrap">
+            <input type="button" value=" 1 " onclick="calculator.answer.value += '1'" />
+            <input type="button" value=" 2 " onclick="calculator.answer.value += '2'" />
+            <input type="button" value=" 3 " onclick="calculator.answer.value += '3'" />
+            <input type="button" value=" + " onclick="calculator.answer.value += '+'" />
+            <br/>
+            
+            <input type="button" value=" 4 " onclick="calculator.answer.value += '4'" />
+            <input type="button" value=" 5 " onclick="calculator.answer.value += '5'" />
+            <input type="button" value=" 6 " onclick="calculator.answer.value += '6'" />
+            <input type="button" value=" - " onclick="calculator.answer.value += '-'" />
+            </br>
+          
+            <input type="button" value=" 7 " onclick="calculator.answer.value += '7'" />
+            <input type="button" value=" 8 " onclick="calculator.answer.value += '8'" />
+            <input type="button" value=" 9 " onclick="calculator.answer.value += '9'" />
+            <input type="button" value=" x " onclick="calculator.answer.value += '*'" />
+            </br>
+        
+            <input type="button" value=" C " onclick="calculator.answer.value = ''" />
+            <input type="button" value=" 0 " onclick="calculator.answer.value += '0'" />
+            <input type="button" value=" = " onclick="calculator.answer.value = eval(calculator.answer.value)" />
+            <input type="button" value=" / " onclick="calculator.answer.value += '/'" />
+            </br>
+  
+    		</div>
+       </form>
+		 <br>
+		</div>
+		<div style="text-align: center;width:99%;margin:0 auto">
+			<ul>
+			  <li id="Clock" onclick=op('time_cont','All','Clock','Calculator')> Hide Clock</li>
+			  <li id="Calculator" onclick=op('cal_cont','All','Calculator','Clock')> Hide Calculator</li>
+			  <li id="All" onclick=op_all('time_cont','cal_cont','All','Clock','Calculator')> Hide All</li>
+			</ul>
+		
+		</div>
+		<!--/Calculator section-->
+	</section>
+	<footer>
+		<p> Copyright &copy; 2019 | All right reserved</p> 
+		<p> Design by <span style="color:orange;"> Rajendra </p>
+	</footer>
+</body>
+<script>
+function startTime() {
+	
+	var h1=document.getElementById("first_h")
+	var h2=document.getElementById("second_h")
+	var m1=document.getElementById("first_min")
+	var m2=document.getElementById("second_min")
+	var s1=document.getElementById("first_sec")
+	var s2=document.getElementById("second_sec")
+  
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  //m = checkTime(m)
+  var sec=s.toString()
+  var min=m.toString()
+  var hr=h.toString()
+  //Adding 0 to number less than 10
+    if(min.length<2){min='0'+min}
+  if(sec.length<2){sec='0'+sec}
+  if(hr.length<2){hr='0'+h}
+  
+  var first_h,second_h,first_min,second_min,first_sec,second_sec
+  //seconds digits
+  first_sec= sec.substr(0,1)
+  second_sec= sec.substr(1,1)
+  //minutes digits
+  first_min= min.substr(0,1)
+  second_min= min.substr(1,1)
+  //hours digits
+  first_h= hr.substr(0,1)
+  second_h= hr.substr(1,1)
+  
+  h1.src='dig'+first_h+".gif"
+  h2.src='dig'+second_h+".gif"
+  m1.src='dig'+first_min+".gif"
+  m2.src='dig'+second_min+".gif"
+  s1.src='dig'+first_sec+".gif"
+  s2.src='dig'+second_sec+".gif"
+  
+  var t = setTimeout(startTime, 500);
+}
+
+function op(section, alls,btn,btn_2){
+	var sec=document.getElementById(section);
+	var btns=document.getElementById(btn); 
+	var btn2=document.getElementById(btn_2)
+	var all=document.getElementById(alls)
+	sec.classList.toggle("opac")
+	
+	if(btns.innerHTML!="Show "+btn){
+	  btns.innerHTML="Show "+btn
+	  	if(btn2.innerHTML.substr(0,1)=="S"){
+  			all.innerHTML="Show "+alls;
+  		}else{
+  			all.innerHTML="Hide "+alls;
+  		}
+	}else{
+		btns.innerHTML="Hide "+btn
+		if(btn2.innerHTML.substr(0,1)=="H"){
+  			all.innerHTML="Hide "+alls;
+  		}else{
+  			all.innerHTML="Show "+alls;
+  		}
+	}
+}
+
+function op_all(section1,section2, btns,btn_1,btn_2){
+	var sec1=document.getElementById(section1);
+	var sec2=document.getElementById(section2);
+	var btn1=document.getElementById(btn_1); 
+	var btn2=document.getElementById(btn_2); 
+	var btn=document.getElementById(btns); 
+	
+	if(btn.innerHTML!="Show "+btns){
+	  btn.innerHTML="Show "+btns
+	  btn1.innerHTML="Show "+btn_1
+	  btn2.innerHTML="Show "+btn_2
+	  sec1.classList.add("opac")
+	  sec2.classList.add("opac")
+	}else{
+		btn.innerHTML="Hide "+btns
+		btn1.innerHTML="Hide "+btn_1
+		btn2.innerHTML="Hide "+btn_2
+		sec1.classList.remove("opac")
+		sec2.classList.remove("opac")
+	}
+}
+</script>
+</html>
+    
